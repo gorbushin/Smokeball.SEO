@@ -12,6 +12,6 @@
         <TextBox x:Name="KeywordsField" HorizontalAlignment="Left" Margin="127,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="635" Text="conveyancing software"/>
         <Label Content="Keywords" HorizontalAlignment="Left" Margin="37,121,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Center" Margin="0,203,0,0" VerticalAlignment="Top" Click="Search_Button_Click" Height="35" Width="144"/>
-        <TextBlock x:Name="ShowResult" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Width="32" FontSize="28"/>
+        <TextBlock x:Name="ShowResult" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Width="667" FontSize="28"/>
     </Grid>
 </Window>

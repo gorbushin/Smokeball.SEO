@@ -13,20 +13,30 @@ public class CheckSeoService : ICheckSeoService
 
     public SeoResult CheckUrlSeo(string searchEngineUri, string keywords, int limit, string urlToFind)
     {
-        var html = QuerySearchEngine(searchEngineUri, keywords, limit);
-        if (html == null) 
+        try
+        {
+            var html = QuerySearchEngine(searchEngineUri, keywords, limit);
+            if (html == null)
+            {
+                return new SeoResult()
+                {
+                    Error = "Empty response from server"
+                };
+            }
+
+            return new SeoResult()
+            {
+                Success = true,
+                Count = CountUrlInHtml(html, urlToFind)
+            };
+        }
+        catch (Exception ex)
         {
             return new SeoResult()
             {
-                Error = "Empty response from server"
+                Error = ex.Message
             };
         }
-
-        return new SeoResult()
-        {
-            Success = true,
-            Count = CountUrlInHtml(html, urlToFind)
-        };
     }
 
     private static int CountUrlInHtml(string html, string urlToFind)

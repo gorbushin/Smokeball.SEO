@@ -19,7 +19,7 @@ public class CheckSeoServiceTests
     }
 
     [TestMethod]
-    public void TestCheckUrlSeoMock()
+    public void CheckSeo_Success()
     {
         var searchEngineUrl = "https://www.google.com.au/";
         var keywords = "conveyancing software";
@@ -29,6 +29,18 @@ public class CheckSeoServiceTests
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
         result.Success.Should().BeTrue();
         result.Count.Should().BeGreaterThan(0);
+    }
+
+    [TestMethod]
+    public void CheckSeo_Fail()
+    {
+        var searchEngineUrl = "https://www/";
+        var keywords = "conveyancing software";
+        var limit = 100;
+        var urlToFind = "www.google.com.au";
+
+        var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
+        result.Success.Should().BeFalse();
     }
 
     private static CheckSeoService MockCheckSeoService()
