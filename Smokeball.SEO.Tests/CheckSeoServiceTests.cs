@@ -19,40 +19,6 @@ namespace Smokeball.SEO.Tests
         }
 
         [TestMethod]
-        public void TestSearchQuerySuccess()
-        {
-            var searchEngineUrl = "https://www.google.com.au";
-            var keywords = "conveyancing software";
-            var limit = 100;
-            var result = checkSeoService.QuerySearchEngine(searchEngineUrl, keywords, limit);
-            result?.Length.Should().BeGreaterThan(0);
-        }
-
-        [TestMethod]
-        public void TestSearchQueryFail()
-        {
-            var searchEngineUrl = "https://wrong-url";
-            var keywords = "conveyancing software";
-            var limit = 100;
-            var result = checkSeoService.QuerySearchEngine(searchEngineUrl, keywords, limit);
-            result?.Should().BeNull();
-        }
-
-        [TestMethod]
-        public void TestCountTrue()
-        {
-            var result = checkSeoService.CountUrlInHtml("aaa", "find");
-            result.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void TestCountFalse()
-        {
-            var result = checkSeoService.CountUrlInHtml("aaa", "find");
-            result.Should().NotBe(1);
-        }
-
-        [TestMethod]
         public void TestCheckUrlSeoTrue()
         {
             var searchEngineUrl = "https://www.google.com.au";

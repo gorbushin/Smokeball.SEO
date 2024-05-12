@@ -18,14 +18,14 @@ namespace Smokeball.SEO.Services
             return CountUrlInHtml(html, urlToFind);
         }
 
-        public int CountUrlInHtml(string html, string urlToFind)
+        private static int CountUrlInHtml(string html, string urlToFind)
         {
             var linksOnThePage = Helpers.GetAnchorTags(html);
             var urlFound = linksOnThePage.Where(x => x.Contains(urlToFind)).Count();
             return urlFound;
         }
 
-        public string? QuerySearchEngine(string searchEngineUri, string keywords, int limit)
+        private string? QuerySearchEngine(string searchEngineUri, string keywords, int limit)
         {
             var query = $"{searchEngineUri}/search?num={limit}&{HttpUtility.UrlEncode(keywords)}";
             var result = Helpers.ScrapPage(_httpClient, query);
