@@ -24,11 +24,11 @@ public class CheckSeoServiceTests
         var searchEngineUrl = "https://www.google.com.au/";
         var keywords = "conveyancing software";
         var limit = 100;
-        var urlToFind = "www.google.com.au";
+        var urlToFind = "www.smokeball.com.au";
 
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
         result.Success.Should().BeTrue();
-        result.Count.Should().Be(4);
+        result.Count.Should().Be(3);
     }
 
     [TestMethod]
@@ -54,6 +54,7 @@ public class CheckSeoServiceTests
 
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
         result.Success.Should().BeFalse();
+        result.Error.Should().NotBeNullOrEmpty();
     }
 
     private static CheckSeoService MockCheckSeoService()
@@ -71,7 +72,7 @@ public class CheckSeoServiceTests
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.Is<HttpRequestMessage>(x => x.RequestUri.AbsoluteUri.Contains("google")),
                 ItExpr.IsAny<CancellationToken>()
             )
             .ReturnsAsync(response)
