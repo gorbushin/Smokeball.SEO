@@ -27,7 +27,7 @@ public class CheckSeoService : ICheckSeoService
 
     private string? QuerySearchEngine(string searchEngineUri, string keywords, int limit)
     {
-        var query = $"{searchEngineUri}/search?num={limit}&{HttpUtility.UrlEncode(keywords)}";
+        var query = $"{searchEngineUri}search?num={limit}&{HttpUtility.UrlEncode(keywords)}";
         var result = Helpers.ScrapPage(_httpClient, query);
         
         if (result == null) { return null; }
