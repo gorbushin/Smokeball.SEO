@@ -32,14 +32,14 @@ public class CheckSeoService(HttpClient httpClient) : ICheckSeoService
             {
                 return new SeoResult()
                 {
-                    Error = "Empty response from server"
+                    Error = "Empty response from the server"
                 };
             }
 
             return new SeoResult()
             {
                 Success = true,
-                Count = CountUrlInHtml(html, urlToFind)
+                Positions = DiscoverRequiredUrl(html, urlToFind)
             };
         }
         else
@@ -51,11 +51,28 @@ public class CheckSeoService(HttpClient httpClient) : ICheckSeoService
         }
     }
 
-    private static int CountUrlInHtml(string html, string urlToCheck)
+    private static string DiscoverRequiredUrl(string html, string urlToCheck)
     {
-        var linksOnThePage = Helpers.GetAnchorTags(html);
-        var foundItemsCount = linksOnThePage.Where(x => x.Contains(urlToCheck)).Count();
-        return foundItemsCount;
+        var linksInSearch = Helpers.GetSearchResultsLinks(html);
+
+        if (linksInSearch.Count == 0)
+            return "Search provided no results";
+
+        string foundPositions = "";
+
+        for (int i = 0; i < linksInSearch.Count; i++)
+        {
+            if (linksInSearch[i].Contains(urlToCheck))
+            { 
+                foundPositions += $"{i} "; 
+            }
+        }
+
+        if (string.IsNullOrEmpty(foundPositions))
+        {
+            return "URL not found in search results";
+        }
+        return foundPositions;
     }
 
     private HttpResponseMessage QuerySearchEngine(string searchEngineUri, string keywords, int limit)

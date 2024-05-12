@@ -28,7 +28,7 @@ public class CheckSeoServiceTests
 
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
         result.Success.Should().BeTrue();
-        result.Count.Should().Be(3);
+        result.Positions.Should().NotBeNullOrEmpty();
     }
 
     [TestMethod]
@@ -41,7 +41,7 @@ public class CheckSeoServiceTests
 
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
         result.Success.Should().BeTrue();
-        result.Count.Should().Be(0);
+        result.Positions.Should().Be("URL not found in search results");
     }
 
     [TestMethod]

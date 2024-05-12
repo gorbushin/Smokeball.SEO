@@ -8,7 +8,7 @@ namespace Smokeball.SEO.Services
 {
     public class SeoResult
     {
-        public int Count { get; set; } = 0;
+        public string? Positions { get; set; }
         public bool Success { get; set; } = false;
         public string? Error { get; set; }
     }
