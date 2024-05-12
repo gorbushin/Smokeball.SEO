@@ -28,7 +28,20 @@ public class CheckSeoServiceTests
 
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
         result.Success.Should().BeTrue();
-        result.Count.Should().BeGreaterThan(0);
+        result.Count.Should().Be(4);
+    }
+
+    [TestMethod]
+    public void CheckSeo_Success_Result_NotFound()
+    {
+        var searchEngineUrl = "https://www.google.com.au/";
+        var keywords = "conveyancing software";
+        var limit = 100;
+        var urlToFind = "www.xbox.com";
+
+        var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
+        result.Success.Should().BeTrue();
+        result.Count.Should().Be(0);
     }
 
     [TestMethod]
@@ -64,10 +77,7 @@ public class CheckSeoServiceTests
             .ReturnsAsync(response)
             .Verifiable();
 
-        var httpClient = new HttpClient(handlerMock.Object)
-        {
-            BaseAddress = new Uri("https://www.google.com.au/")
-        };
+        var httpClient = new HttpClient(handlerMock.Object);
 
         return new CheckSeoService(httpClient);
     }
