@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smokeball.SEO.UI", "Smokeball.SEO.UI\Smokeball.SEO.UI.csproj", "{5CBFD026-A64D-4CBB-A9AC-4D50C14E9492}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smokeball.SEO.Services", "Smokeball.SEO.Services\Smokeball.SEO.Services.csproj", "{2C031646-5B6B-4681-ACF4-39BDF212787D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smokeball.SEO.Tests", "Smokeball.SEO.Tests\Smokeball.SEO.Tests.csproj", "{ACEB8DEE-9E22-4F49-B80F-A7A485DF27EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F7B65B8-0EDF-4DFD-97AD-074734AD9B74}"
+	ProjectSection(SolutionItems) = preProject
+		Smokeball.txt = Smokeball.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CBFD026-A64D-4CBB-A9AC-4D50C14E9492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBFD026-A64D-4CBB-A9AC-4D50C14E9492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBFD026-A64D-4CBB-A9AC-4D50C14E9492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CBFD026-A64D-4CBB-A9AC-4D50C14E9492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C031646-5B6B-4681-ACF4-39BDF212787D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C031646-5B6B-4681-ACF4-39BDF212787D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C031646-5B6B-4681-ACF4-39BDF212787D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C031646-5B6B-4681-ACF4-39BDF212787D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACEB8DEE-9E22-4F49-B80F-A7A485DF27EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACEB8DEE-9E22-4F49-B80F-A7A485DF27EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACEB8DEE-9E22-4F49-B80F-A7A485DF27EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACEB8DEE-9E22-4F49-B80F-A7A485DF27EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF25B2F5-303F-4648-90A5-730843E7F60D}
+	EndGlobalSection
+EndGlobal
