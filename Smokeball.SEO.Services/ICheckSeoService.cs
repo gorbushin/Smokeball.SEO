@@ -8,5 +8,5 @@ namespace Smokeball.SEO.Services;
 
 public interface ICheckSeoService
 {
-    public int CheckUrlSeo(string searchEngineUrl, string keywords, int limit, string urlToFind);
+    public SeoResult CheckUrlSeo(string searchEngineUrl, string keywords, int limit, string urlToFind);
 }

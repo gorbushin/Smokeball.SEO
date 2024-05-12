@@ -15,10 +15,6 @@ public class CheckSeoServiceTests
 
     public CheckSeoServiceTests()
     {
-        //var services = new ServiceCollection();
-        //services.AddHttpClient();
-        //services.AddTransient<ICheckSeoService, CheckSeoService>();
-        //var serviceProvider = services.BuildServiceProvider();
         mockService = MockCheckSeoService();
     }
 
@@ -31,7 +27,8 @@ public class CheckSeoServiceTests
         var urlToFind = "www.google.com.au";
 
         var result = mockService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
-        result.Should().BeGreaterThan(0);
+        result.Success.Should().BeTrue();
+        result.Count.Should().BeGreaterThan(0);
     }
 
     private static CheckSeoService MockCheckSeoService()

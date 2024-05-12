@@ -31,7 +31,16 @@ public partial class MainWindow : Window
         if (!string.IsNullOrEmpty(urlToFind) && !string.IsNullOrEmpty(keywords))
         {
             var seoResult = _checkSeoService.CheckUrlSeo(searchEngineUrl, keywords, resultLimit, urlToFind);
-            ShowResult.Text = seoResult.ToString();
+
+            if (seoResult.Success)
+            {
+                ShowResult.Text = seoResult.Count.ToString();
+            }
+            else
+            {
+                ShowResult.Text = seoResult.Error;
+            }
+            
         }
     }
 }
