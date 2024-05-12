@@ -11,11 +11,28 @@ public class CheckSeoService : ICheckSeoService
         _httpClient = httpClient;
     }
 
-    public SeoResult CheckUrlSeo(string searchEngineUri, string keywords, int limit, string urlToFind)
+    public SeoResult CheckUrlSeo(string searchEngineUri, string keywords, int limit, string urlToCheck)
     {
         try
         {
-            var html = QuerySearchEngine(searchEngineUri, keywords, limit);
+            var response = QuerySearchEngine(searchEngineUri, keywords, limit);
+            return CheckResponseforSeo(response, urlToCheck);
+        }
+        catch (Exception ex)
+        {
+            return new SeoResult()
+            {
+                Error = ex.Message
+            };
+        }
+    }
+
+    private static SeoResult CheckResponseforSeo(HttpResponseMessage response, string urlToFind)
+    {
+        if (response.IsSuccessStatusCode)
+        {
+            var html = response.Content.ReadAsStringAsync().Result;
+
             if (string.IsNullOrEmpty(html))
             {
                 return new SeoResult()
@@ -30,25 +47,25 @@ public class CheckSeoService : ICheckSeoService
                 Count = CountUrlInHtml(html, urlToFind)
             };
         }
-        catch (Exception ex)
+        else
         {
             return new SeoResult()
             {
-                Error = ex.Message
+                Error = $"Error code: {response.StatusCode}"
             };
         }
     }
 
-    private static int CountUrlInHtml(string html, string urlToFind)
+    private static int CountUrlInHtml(string html, string urlToCheck)
     {
         var linksOnThePage = Helpers.GetAnchorTags(html);
-        var urlFound = linksOnThePage.Where(x => x.Contains(urlToFind)).Count();
-        return urlFound;
+        var foundItemsCount = linksOnThePage.Where(x => x.Contains(urlToCheck)).Count();
+        return foundItemsCount;
     }
 
-    private string? QuerySearchEngine(string searchEngineUri, string keywords, int limit)
+    private HttpResponseMessage QuerySearchEngine(string searchEngineUri, string keywords, int limit)
     {
         var query = $"{searchEngineUri}search?num={limit}&{HttpUtility.UrlEncode(keywords)}";
-        return Helpers.ScrapPage(_httpClient, query);
+        return _httpClient.GetAsync(query).Result;
     }
 }

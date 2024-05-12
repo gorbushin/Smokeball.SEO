@@ -6,16 +6,6 @@ namespace Smokeball.SEO.Services;
 
 internal class Helpers
 {
-    internal static string? ScrapPage(HttpClient httpClient, string url)
-    {
-        var response = httpClient.GetAsync(url).Result;
-        if (response.IsSuccessStatusCode)
-        {
-            return response.Content.ReadAsStringAsync().Result;
-        }
-        return null;
-    }
-
     internal static List<string> GetAnchorTags(string html)
     {
         List<string> hrefTags = [];
