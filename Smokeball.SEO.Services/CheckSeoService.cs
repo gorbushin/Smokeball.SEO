@@ -2,14 +2,9 @@
 
 namespace Smokeball.SEO.Services;
 
-public class CheckSeoService : ICheckSeoService
+public class CheckSeoService(HttpClient httpClient) : ICheckSeoService
 {
-    private readonly HttpClient _httpClient;
-
-    public CheckSeoService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
+    private readonly HttpClient _httpClient = httpClient;
 
     public SeoResult CheckUrlSeo(string searchEngineUri, string keywords, int limit, string urlToCheck)
     {
