@@ -16,7 +16,7 @@ public class CheckSeoService : ICheckSeoService
         try
         {
             var html = QuerySearchEngine(searchEngineUri, keywords, limit);
-            if (html == null)
+            if (string.IsNullOrEmpty(html))
             {
                 return new SeoResult()
                 {

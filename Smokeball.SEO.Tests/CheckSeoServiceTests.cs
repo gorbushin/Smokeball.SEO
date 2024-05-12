@@ -49,16 +49,19 @@ public class CheckSeoServiceTests
 
         var fileContent = (File.ReadAllBytes("SearchPageExample.html"));
         var stream = new MemoryStream(fileContent);
-        var response = new HttpResponseMessage();
+        var response = new HttpResponseMessage()
+        {
+            Content = new StreamContent(stream)
+        };
 
         handlerMock
             .Protected()
-            .Setup<HttpResponseMessage>(
-                "Send",
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
                 ItExpr.IsAny<HttpRequestMessage>(),
                 ItExpr.IsAny<CancellationToken>()
             )
-            .Returns(response)
+            .ReturnsAsync(response)
             .Verifiable();
 
         var httpClient = new HttpClient(handlerMock.Object)
