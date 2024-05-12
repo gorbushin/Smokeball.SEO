@@ -2,36 +2,36 @@
 using System.Text.RegularExpressions;
 using Microsoft.Net.Http.Headers;
 
-namespace Smokeball.SEO.Services
+namespace Smokeball.SEO.Services;
+
+internal class Helpers
 {
-    internal class Helpers
+    internal static HttpContent? ScrapPage(HttpClient httpClient, string url)
     {
-        internal static HttpContent? ScrapPage(HttpClient httpClient, string url)
+        var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url)
         {
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url)
+            Headers =
             {
-                Headers =
-                {
-                    { HeaderNames.Accept, "text/html" },
-                    { HeaderNames.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" }
-                }
-            };
-
-            var httpResponseMessage = httpClient.Send(httpRequestMessage);
-
-            if (httpResponseMessage.IsSuccessStatusCode)
-            {
-                return httpResponseMessage.Content;
+                { HeaderNames.Accept, "text/html" },
+                { HeaderNames.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" }
             }
+        };
 
-            return null;
+        var httpResponseMessage = httpClient.Send(httpRequestMessage);
+
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+            return httpResponseMessage.Content;
         }
 
-        internal static List<string> GetAnchorTags(string html)
-        {
-            List<string> hrefTags = [];
+        return null;
+    }
 
-            Regex regxHref = new Regex(@"(?inx)
+    internal static List<string> GetAnchorTags(string html)
+    {
+        List<string> hrefTags = [];
+
+        Regex regxHref = new Regex(@"(?inx)
                 <a \s [^>]*
                     href \s* = \s*
                         (?<q> ['""] )
@@ -39,12 +39,11 @@ namespace Smokeball.SEO.Services
                         \k<q>
                 [^>]* >");
 
-            foreach (Match match in regxHref.Matches(html))
-            {
-                hrefTags.Add(match.Groups["url"].ToString());
-            }
-
-            return hrefTags;
+        foreach (Match match in regxHref.Matches(html))
+        {
+            hrefTags.Add(match.Groups["url"].ToString());
         }
+
+        return hrefTags;
     }
 }

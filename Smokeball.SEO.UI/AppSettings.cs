@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Smokeball.SEO;
+namespace Smokeball.SEO.UI;
 
 public class AppSettings
 {

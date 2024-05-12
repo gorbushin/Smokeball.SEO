@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Smokeball.SEO.Services;
 
-namespace Smokeball.SEO;
+namespace Smokeball.SEO.UI;
 
 public partial class App : Application
 {

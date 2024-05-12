@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using Smokeball.SEO.Services;
 
-namespace Smokeball.SEO;
+namespace Smokeball.SEO.UI;
 
 public partial class MainWindow : Window
 {
