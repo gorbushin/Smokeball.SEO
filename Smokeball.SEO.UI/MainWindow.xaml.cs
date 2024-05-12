@@ -26,10 +26,10 @@ namespace Smokeball.SEO
         {
             var searchEngineUrl = "https://www.google.com.au";
             var limit = 100;
-            var keywords = KeywordsField.Text;
-            var urlToFind = UrlField.Text;
+            var keywords = KeywordsField.Text.Trim();
+            var urlToFind = UrlField.Text.Trim();
 
-            if (urlToFind != null && keywords != null)
+            if (!string.IsNullOrEmpty(urlToFind) && !string.IsNullOrEmpty(keywords))
             {
                 var seoResult = _checkSeoService.CheckUrlSeo(searchEngineUrl, keywords, limit, urlToFind);
                 ShowResult.Text = seoResult.ToString();
