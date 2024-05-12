@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Smokeball.SEO.Services;
 
 namespace Smokeball.SEO;
@@ -8,15 +10,24 @@ namespace Smokeball.SEO;
 public partial class App : Application
 {
     public static IHost? AppHost { get; private set; }
+    public static IConfiguration? Config { get; private set; }
 
     public App()
     {
+        Config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((hostContext, services) =>
             {
+                services.AddOptions();
                 services.AddSingleton<MainWindow>();
                 services.AddHttpClient();
                 services.AddTransient<ICheckSeoService, CheckSeoService>();
+
+                services.Configure<AppSettings>(Config.GetSection("AppSettings"));
             })
             .Build();
     }
