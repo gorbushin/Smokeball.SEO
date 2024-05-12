@@ -34,7 +34,7 @@ public partial class MainWindow : Window
 
             if (seoResult.Success)
             {
-                ShowResult.Text = seoResult.Count.ToString();
+                ShowResult.Text = $"{seoResult.Count.ToString()} links found in search results";
             }
             else
             {
