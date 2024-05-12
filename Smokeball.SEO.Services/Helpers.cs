@@ -6,24 +6,13 @@ namespace Smokeball.SEO.Services;
 
 internal class Helpers
 {
-    internal static HttpContent? ScrapPage(HttpClient httpClient, string url)
+    internal static string? ScrapPage(HttpClient httpClient, string url)
     {
-        var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url)
+        var response = httpClient.GetAsync(url).Result;
+        if (response.IsSuccessStatusCode)
         {
-            Headers =
-            {
-                { HeaderNames.Accept, "text/html" },
-                { HeaderNames.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" }
-            }
-        };
-
-        var httpResponseMessage = httpClient.Send(httpRequestMessage);
-
-        if (httpResponseMessage.IsSuccessStatusCode)
-        {
-            return httpResponseMessage.Content;
+            return response.Content.ReadAsStringAsync().Result;
         }
-
         return null;
     }
 
